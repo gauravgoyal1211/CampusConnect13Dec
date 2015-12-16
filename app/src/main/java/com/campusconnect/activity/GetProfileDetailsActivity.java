@@ -197,13 +197,16 @@ public class GetProfileDetailsActivity extends AppCompatActivity implements View
             int response_code = msg.what;
             if (response_code != 0) {
                 String strResponse = (String) msg.obj;
-                Log.v("Response", strResponse);
+                Log.v("GetProfileDetails", strResponse);
                 if (strResponse != null && strResponse.length() > 0) {
                     switch (response_code) {
                         case WebServiceDetails.PID_SAVE_PROFILE: {
                             try {
                                 JSONObject profileObj = new JSONObject(strResponse);
                                 String pid=profileObj.getString("pid");
+                                String collegeid=profileObj.getString("collegeId");
+                                Log.v("GetProfileDEtails", pid + " "+collegeid);
+                                SharedpreferenceUtility.getInstance(GetProfileDetailsActivity.this).putString(AppConstants.COLLEGE_ID,collegeid);
                                 SharedpreferenceUtility.getInstance(GetProfileDetailsActivity.this).putString(AppConstants.PERSON_PID,pid);
                             } catch (JSONException e) {
                                 e.printStackTrace();
