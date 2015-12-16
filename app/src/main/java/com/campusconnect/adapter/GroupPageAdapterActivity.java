@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -112,9 +114,9 @@ public class GroupPageAdapterActivity extends
             }
             if (member_click_count == 1) {
 
-                holder1.tbtn_member.setBackgroundResource(R.drawable.members_selected);
+                holder1.iv_member.setBackgroundResource(R.drawable.group_member_selected);
             } else {
-                holder1.tbtn_member.setBackgroundResource(R.drawable.members);
+                holder1.iv_member.setBackgroundResource(R.drawable.group_member);
             }
         } else {
             holder2 = (ExtraGroupInfoListHolder) groupViewHolder;
@@ -159,7 +161,8 @@ public class GroupPageAdapterActivity extends
 
         TextView group_name, members_count, followers_count;
         CircularImageView group_icon;
-        ToggleButton tbtn_follow, tbtn_member;
+        ToggleButton tbtn_follow;
+        ImageView iv_member;
 
         public GroupInfoViewHolder(View itemView) {
             super(itemView);
@@ -168,7 +171,7 @@ public class GroupPageAdapterActivity extends
             followers_count = (TextView) itemView.findViewById(R.id.tv_followers_count);
             group_icon = (CircularImageView) itemView.findViewById(R.id.group_image);
             tbtn_follow = (ToggleButton) itemView.findViewById(R.id.tb_followers);
-            tbtn_member = (ToggleButton) itemView.findViewById(R.id.tb_members);
+            iv_member = (ImageView) itemView.findViewById(R.id.tb_members);
 
 
             tbtn_follow.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +196,7 @@ public class GroupPageAdapterActivity extends
                     follow_click_count++;
                 }
             });
-            tbtn_member.setOnClickListener(new View.OnClickListener() {
+            iv_member.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MemberConfirmationDialog confirmDialog = new MemberConfirmationDialog((Activity) v.getContext());
@@ -314,10 +317,10 @@ public class GroupPageAdapterActivity extends
                 case R.id.btn_yes: {
                     if (member_click_count == 1) {
                         member_click_count=0;
-                        holder1.tbtn_member.setBackgroundResource(R.drawable.members);
+                        holder1.iv_member.setBackgroundResource(R.drawable.group_member);
                     } else {
                         member_click_count=1;
-                        holder1.tbtn_member.setBackgroundResource(R.drawable.members_selected);
+                        holder1.iv_member.setBackgroundResource(R.drawable.group_member_selected);
                     }
                     yes_dialog_box_click_count++;
                     webApiGroupJoin(v.getContext());
